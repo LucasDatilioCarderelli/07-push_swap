@@ -6,16 +6,28 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:16:05 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/12 01:18:38 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/12 22:32:24 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "../libs/libft/libft.h"
+#include "push_swap.h"
 
 /**
- * @brief not duplicate, only number.
+ * @brief	In case of error, it must display "Error" followed by a ’\\n’
+ * 			on the standard error. Print a message and exit with a failure.
+ * 
+ * @param	error_msg	char string message.
+ */
+void	print_error(char *error_msg)
+{
+	write(2, "\033[0;31mError:\033[0m\n", 19);
+	ft_putstr_fd(error_msg, 2);
+	write(2, "\n", 2);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * @brief	not duplicate, only number.
  */
 int	valid_args(int argc, char **argv)
 {
@@ -28,9 +40,9 @@ int	valid_args(int argc, char **argv)
 		j = i + 1;
 		while (j < argc)
 		{
-			printf("i: %d, j: %d\n; %d", ft_atoi(argv[i]), ft_atoi(argv[j]));
+			printf("i: %d, j: %d\n", ft_atoi(argv[i]), ft_atoi(argv[j]));
 			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
-				exit(2);
+				print_error("Found Duplicate");
 			j++;
 		}
 		i++;
