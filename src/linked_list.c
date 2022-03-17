@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 00:49:54 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/17 00:58:07 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/17 01:48:57 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ void	free_node(t_node *head)
  */
 void	print_node(t_node *head)
 {
+	if (head == NULL)
+		printf("NULL\n");
 	while (head != NULL)
 	{
 		ft_printf("%d \n", head -> value);
 		head = head -> next;
 	}
-	if (head == NULL)
-		printf("NULL\n");
 }
