@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:15:34 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/14 00:19:22 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/16 18:22:37 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	arg_is_alpha(char *argv)
 int	valid_args(int argc, char **argv)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 1;
 	while (i < argc)
