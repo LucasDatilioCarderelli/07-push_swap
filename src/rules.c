@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:42:41 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/17 14:43:54 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:39:31 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,16 @@ void	rotate(t_node **head)
 	tmp = *head;
 	*head = (*head)->next;
 	free(tmp);
+}
+
+void	swap(t_node **head)
+{
+	int	tmp;
+
+	if ((*head) && (*head)->next)
+	{
+		tmp = (*head)->value;
+		(*head)->value = (*head)->next -> value;
+		(*head)->next -> value = tmp;
+	}
 }
