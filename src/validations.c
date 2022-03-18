@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:15:34 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/16 18:22:37 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/19 00:03:48 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	valid_args(int argc, char **argv)
 			print_error("arguments aren't integers");
 		while (j < argc)
 		{
-			printf("i: %d, j: %d\n", ft_atoi(argv[i]), ft_atoi(argv[j]));
 			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
 				print_error("there are duplicates");
 			j++;
