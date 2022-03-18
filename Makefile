@@ -6,7 +6,7 @@
 #    By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 15:13:58 by ldatilio          #+#    #+#              #
-#    Updated: 2022/03/17 00:52:40 by ldatilio         ###   ########.fr        #
+#    Updated: 2022/03/19 00:05:49 by ldatilio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ INCLUDE		=	-I ./includes
 
 CC			=	gcc -g
 RM			=	rm -f
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=leak
+CFLAGS		=	-Wall -Wextra -Werror
 
 LIBFT		=	./libs/libft/libft.a
 PRINTF		=	./libs/printf/libftprintf.a
@@ -25,7 +25,7 @@ PRINTF		=	./libs/printf/libftprintf.a
 SRC_PATH	=	./src/
 OBJ_PATH	=	./obj/
 
-SRC_FILES	=	main.c validations.c	\
+SRC_FILES	=	main.c validations.c linked_list.c rules.c	\
 
 SRC			=	$(addprefix $(SRC_PATH),$(SRC_FILES))
 OBJ			=	$(addprefix $(OBJ_PATH),$(subst .c,.o,$(SRC_FILES)))
