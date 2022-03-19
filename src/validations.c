@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:15:34 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/19 00:03:48 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/19 23:08:54 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,21 @@ int	valid_args(int argc, char **argv)
 		i++;
 	}
 	return (0);
+}
+
+int	is_sorted(t_node *head, int argc)
+{
+	int	i;
+
+	i = 1;
+	while (head -> next != NULL)
+	{
+		if (head -> value > head -> next -> value)
+			return (FALSE);
+		head = head -> next;
+		i++;
+	}
+	if (i < argc - 1)
+		return (FALSE);
+	return (TRUE);
 }
