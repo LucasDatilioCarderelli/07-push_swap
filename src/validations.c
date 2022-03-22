@@ -6,24 +6,22 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:15:34 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/19 23:08:54 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/22 01:27:36 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /**
- * @brief	In case of error, it must display "Error" followed by a ’\\n’
- * 			on the standard error. Print a message and exit with a failure.
+ * @brief	In case of error, it must display "Error" followed by a ’\\n’ 
+ * on the standard error. Print a message and exit with a failure.
  * 
- * @param	error_msg	char string message.
+ * @param	error_num	Exit with a integer code.
  */
-void	print_error(char *error_msg)
+void	exit_error(int error_num)
 {
-	write(2, "\033[0;31mError:\033[0m\n", 19);
-	ft_putstr_fd(error_msg, 2);
-	write(2, "\n", 2);
-	exit(EXIT_FAILURE);
+	write(2, "\033[0;31mError\033[0m\n", 18);
+	exit(error_num);
 }
 
 /**
@@ -58,11 +56,11 @@ int	valid_args(int argc, char **argv)
 	{
 		j = i + 1;
 		if (arg_is_alpha(argv[i]))
-			print_error("arguments aren't integers");
+			exit_error(1);
 		while (j < argc)
 		{
 			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
-				print_error("there are duplicates");
+				exit_error(2);
 			j++;
 		}
 		i++;
