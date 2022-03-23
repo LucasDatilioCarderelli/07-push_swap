@@ -6,14 +6,14 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:15:34 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/22 01:27:36 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/23 02:16:29 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /**
- * @brief	In case of error, it must display "Error" followed by a ’\\n’ 
+ * @brief In case of error, it must display "Error" followed by a ’\\n’ 
  * on the standard error. Print a message and exit with a failure.
  * 
  * @param	error_num	Exit with a integer code.
@@ -25,7 +25,7 @@ void	exit_error(int error_num)
 }
 
 /**
- * @brief iterate an argument and verify if there's a aplha.
+ * @brief Iterate an argument and verify if there's a aplha.
  * 
  * @param argv argument to be validated.
  * @return int TRUE (1), if a char is aplha.
@@ -44,7 +44,7 @@ int	arg_is_alpha(char *argv)
 }
 
 /**
- * @brief	not duplicate, only number.
+ * @brief	not duplicate, only number, only integer.
  */
 int	valid_args(int argc, char **argv)
 {
@@ -57,10 +57,12 @@ int	valid_args(int argc, char **argv)
 		j = i + 1;
 		if (arg_is_alpha(argv[i]))
 			exit_error(1);
+		if (ft_atol(argv[i]) > INT_MAX || ft_atol(argv[i]) < INT_MIN)
+			exit_error(2);
 		while (j < argc)
 		{
-			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
-				exit_error(2);
+			if (ft_atol(argv[i]) == ft_atol(argv[j]))
+				exit_error(3);
 			j++;
 		}
 		i++;
@@ -68,6 +70,13 @@ int	valid_args(int argc, char **argv)
 	return (0);
 }
 
+/**
+ * @brief Validate if the full list is sorted and return True or False.
+ * 
+ * @param head first point of the linked list.
+ * @param argc Quantity of arguments.
+ * @return int TRUE:1 FALSE:0
+ */
 int	is_sorted(t_node *head, int argc)
 {
 	int	i;
