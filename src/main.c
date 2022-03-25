@@ -6,44 +6,56 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:16:05 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/19 00:22:53 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/25 02:42:51 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	operations(char *action, t_stack *stack)
+{
+	if (!ft_strncmp(action, "sa", 2))
+		swap(&stack -> a);
+	else if (!ft_strncmp(action, "sb", 2))
+		swap(&stack -> b);
+	else if (!ft_strncmp(action, "pa", 2))
+		push(&stack -> a, &stack -> b);
+	else if (!ft_strncmp(action, "pb", 2))
+		push(&stack -> b, &stack -> a);
+	else if (!ft_strncmp(action, "ra", 2))
+		rotate(&stack -> a);
+	else if (!ft_strncmp(action, "rb", 2))
+		rotate(&stack -> b);
+	else if (!ft_strncmp(action, "rra", 3))
+		rrotate(&stack -> a);
+	else if (!ft_strncmp(action, "rrb", 3))
+		rrotate(&stack -> b);
+	ft_printf("%s\n", action);
+}
+
 void	create_stack(int argc, char **argv)
 {
 	int		i;
-	t_node	*stack_a;
-	t_node	*stack_b;
+	t_stack	stack;
 
 	i = 1;
-	stack_a = NULL;
-	stack_b = NULL;
+	stack.a = NULL;
+	stack.b = NULL;
 	while (i < argc)
 	{
-		insert_back(&stack_a, ft_atoi(argv[i]));
+		insert_back(&stack.a, ft_atoi(argv[i]));
 		i++;
 	}
-	ft_printf("\nstack_a:\n");
-	print_node(stack_a);
-	ft_printf("stack_b:\n");
-	print_node(stack_b);
-	swap(&stack_a);
-	push(&stack_b, &stack_a);
-	push(&stack_b, &stack_a);
-	push(&stack_b, &stack_a);
-	swap(&stack_a);
-	push(&stack_a, &stack_b);
-	push(&stack_a, &stack_b);
-	push(&stack_a, &stack_b);
-	ft_printf("\nstack_a:\n");
-	print_node(stack_a);
-	ft_printf("stack_b:\n");
-	print_node(stack_b);
-	free_node(stack_a);
-	free_node(stack_b);
+	operations("sa", &stack);
+	operations("pb", &stack);
+	operations("pb", &stack);
+	operations("pb", &stack);
+	operations("sa", &stack);
+	operations("pa", &stack);
+	operations("pa", &stack);
+	operations("pa", &stack);
+	free_node(stack.a);
+	free_node(stack.b);
 }
 
 int	main(int argc, char **argv)
