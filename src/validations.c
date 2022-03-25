@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:15:34 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/23 02:16:29 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/24 18:35:49 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,24 @@ int	arg_is_alpha(char *argv)
  */
 int	valid_args(int argc, char **argv)
 {
-	int	i;
-	int	j;
+	int			i;
+	int			j;
+	long int	curr_num;
+	long int	next_num;
 
 	i = 1;
 	while (i < argc)
 	{
 		j = i + 1;
+		curr_num = ft_atol(argv[i]);
 		if (arg_is_alpha(argv[i]))
 			exit_error(1);
-		if (ft_atol(argv[i]) > INT_MAX || ft_atol(argv[i]) < INT_MIN)
+		if (curr_num > INT_MAX || curr_num < INT_MIN)
 			exit_error(2);
 		while (j < argc)
 		{
-			if (ft_atol(argv[i]) == ft_atol(argv[j]))
+			next_num = ft_atol(argv[j]);
+			if (curr_num == next_num)
 				exit_error(3);
 			j++;
 		}
