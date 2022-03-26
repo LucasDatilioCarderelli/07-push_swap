@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:15:34 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/24 18:35:49 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:53:43 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	valid_args(int argc, char **argv)
  * @param argc Quantity of arguments.
  * @return int TRUE:1 FALSE:0
  */
-int	is_sorted(t_node *head, int argc)
+int	is_sorted(t_node *head)
 {
 	int	i;
 
@@ -93,7 +93,5 @@ int	is_sorted(t_node *head, int argc)
 		head = head -> next;
 		i++;
 	}
-	if (i < argc - 1)
-		return (FALSE);
 	return (TRUE);
 }

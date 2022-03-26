@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:16:05 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/25 02:42:51 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/26 03:45:29 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,43 @@ void	operations(char *action, t_stack *stack)
 	ft_printf("%s\n", action);
 }
 
+int	low_num_pos(t_node *head)
+{
+	int low;
+
+	low = head -> value;
+	while (head)
+	{
+		if (head -> value < low)
+			low = head -> value;
+		head = head -> next;
+	}
+	return (low);
+}
+
+void	sort(t_stack *stack)
+{
+	int	low;
+
+	while (!is_sorted(stack -> a))
+	{
+		low = low_num_pos(stack -> a);
+		while (stack -> a -> value != low)
+			operations("ra", stack);
+		operations("pb", stack);
+		// operations("sa", stack);
+		// operations("pb", stack);
+		// operations("pb", stack);
+		// operations("pb", stack);
+		// operations("sa", stack);
+		// operations("pa", stack);
+		// operations("pa", stack);
+		// operations("pa", stack);
+	}
+	while (stack -> b != NULL)
+		operations("pa", stack);
+}
+
 void	create_stack(int argc, char **argv)
 {
 	int		i;
@@ -46,14 +83,13 @@ void	create_stack(int argc, char **argv)
 		insert_back(&stack.a, ft_atoi(argv[i]));
 		i++;
 	}
-	operations("sa", &stack);
-	operations("pb", &stack);
-	operations("pb", &stack);
-	operations("pb", &stack);
-	operations("sa", &stack);
-	operations("pa", &stack);
-	operations("pa", &stack);
-	operations("pa", &stack);
+	// ft_printf("\n");
+	// print_node(stack.a);
+	sort(&stack);
+	// ft_printf("\n");
+	// print_node(stack.a);
+	// ft_printf("\n");
+	// print_node(stack.b);
 	free_node(stack.a);
 	free_node(stack.b);
 }

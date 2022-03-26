@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:44:07 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/25 02:49:06 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:53:53 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_stack
 }	t_stack;
 
 int			valid_args(int argc, char **argv);
-int			is_sorted(t_node *head, int argc);
+int			is_sorted(t_node *head);
 
 void		insert_back(t_node **head, int value);
 void		insert_front(t_node	**head, int value);
