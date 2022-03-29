@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:16:05 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/26 03:45:29 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/29 22:06:22 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,13 @@ void	sort(t_stack *stack)
 
 	while (!is_sorted(stack -> a))
 	{
+		if (stack -> a -> next -> value < stack -> a -> value)
+			operations("sa", stack);
 		low = low_num_pos(stack -> a);
 		while (stack -> a -> value != low)
 			operations("ra", stack);
-		operations("pb", stack);
-		// operations("sa", stack);
-		// operations("pb", stack);
-		// operations("pb", stack);
-		// operations("pb", stack);
-		// operations("sa", stack);
-		// operations("pa", stack);
-		// operations("pa", stack);
-		// operations("pa", stack);
+		if (!is_sorted(stack -> a))
+			operations("pb", stack);
 	}
 	while (stack -> b != NULL)
 		operations("pa", stack);
@@ -83,13 +78,7 @@ void	create_stack(int argc, char **argv)
 		insert_back(&stack.a, ft_atoi(argv[i]));
 		i++;
 	}
-	// ft_printf("\n");
-	// print_node(stack.a);
 	sort(&stack);
-	// ft_printf("\n");
-	// print_node(stack.a);
-	// ft_printf("\n");
-	// print_node(stack.b);
 	free_node(stack.a);
 	free_node(stack.b);
 }
