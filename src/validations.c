@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 00:15:34 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/26 01:53:43 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:16:57 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  */
 void	exit_error(int error_num)
 {
-	write(2, "\033[0;31mError\033[0m\n", 18);
+	write(2, "Error\n", 6);
 	exit(error_num);
 }
 
