@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:16:05 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/29 22:06:22 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/04/01 03:24:04 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,31 +33,44 @@ void	operations(char *action, t_stack *stack)
 	ft_printf("%s\n", action);
 }
 
-int	low_num_pos(t_node *head)
+int	low_num_pos(t_node *head, int *low)
 {
-	int low;
+	int	low_pos;
+	int	i;
 
-	low = head -> value;
+	*low = head -> value;
 	while (head)
 	{
-		if (head -> value < low)
-			low = head -> value;
+		if (head -> value < *low)
+		{
+			*low = head -> value;
+			low_pos = i;
+		}
 		head = head -> next;
+		i++;
 	}
-	return (low);
+	if (low_pos > i / 2)
+		return (1);
+	return (0);
 }
 
 void	sort(t_stack *stack)
 {
 	int	low;
+	int	rotation;
 
 	while (!is_sorted(stack -> a))
 	{
 		if (stack -> a -> next -> value < stack -> a -> value)
 			operations("sa", stack);
-		low = low_num_pos(stack -> a);
+		rotation = low_num_pos(stack -> a, &low);
 		while (stack -> a -> value != low)
-			operations("ra", stack);
+		{
+			if (rotation == 0)
+				operations("ra", stack);
+			else
+				operations("rra", stack);
+		}
 		if (!is_sorted(stack -> a))
 			operations("pb", stack);
 	}
