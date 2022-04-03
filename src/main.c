@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:16:05 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/04/01 03:24:04 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/04/03 05:16:24 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	low_num_pos(t_node *head, int *low)
 	int	i;
 
 	*low = head -> value;
+	i = 0;
 	while (head)
 	{
 		if (head -> value < *low)
@@ -50,6 +51,28 @@ int	low_num_pos(t_node *head, int *low)
 		i++;
 	}
 	if (low_pos > i / 2)
+		return (1);
+	return (0);
+}
+
+int	high_num_pos(t_node *head, int *high)
+{
+	int	high_pos;
+	int	i;
+
+	*high = head -> value;
+	i = 0;
+	while (head)
+	{
+		if (head -> value > *high)
+		{
+			*high = head -> value;
+			high_pos = i;
+		}
+		head = head -> next;
+		i++;
+	}
+	if (high_pos > i / 2)
 		return (1);
 	return (0);
 }
@@ -78,6 +101,35 @@ void	sort(t_stack *stack)
 		operations("pa", stack);
 }
 
+void	long_sort(t_stack *stack)
+{
+	int	i;
+	int high;
+	int rotation;
+
+	low_num_pos(stack->a, &i);
+	while (stack->a != NULL)
+	{
+		if (stack->a->value < i + 25)
+		{
+			operations("pb", stack);
+			i++;
+		}
+		else
+			operations("ra", stack);
+	}
+	while (stack->b != NULL)
+	{
+		rotation = high_num_pos(stack->b, &high);
+		while (stack -> b -> value != high)
+			if (rotation == 0)
+				operations("rb", stack);
+			else
+				operations("rrb", stack);
+		operations("pa", stack);
+	}
+}
+
 void	create_stack(int argc, char **argv)
 {
 	int		i;
@@ -91,7 +143,10 @@ void	create_stack(int argc, char **argv)
 		insert_back(&stack.a, ft_atoi(argv[i]));
 		i++;
 	}
-	sort(&stack);
+	if (argc - 1 <= 10)
+		sort(&stack);
+	else
+		long_sort(&stack);
 	free_node(stack.a);
 	free_node(stack.b);
 }
