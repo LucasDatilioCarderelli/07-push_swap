@@ -6,11 +6,18 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:16:05 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/04/03 05:16:24 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/04/03 19:50:12 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	rr(char *action, t_stack *stack)
+{
+	rotate(&stack -> a);
+	rotate(&stack -> b);
+	ft_printf("%s\n", action);
+}
 
 void	operations(char *action, t_stack *stack)
 {
@@ -77,7 +84,7 @@ int	high_num_pos(t_node *head, int *high)
 	return (0);
 }
 
-void	sort(t_stack *stack)
+void	small_sort(t_stack *stack)
 {
 	int	low;
 	int	rotation;
@@ -110,18 +117,23 @@ void	long_sort(t_stack *stack)
 	low_num_pos(stack->a, &i);
 	while (stack->a != NULL)
 	{
-		if (stack->a->value < i + 25)
+		if (stack->a->value < i + 20)
 		{
 			operations("pb", stack);
 			i++;
 		}
 		else
-			operations("ra", stack);
+		{
+			if (i > 2 && stack->b->value < stack->b->next->value)
+				rr("rr", stack);
+			else
+				operations("ra", stack);
+		}
 	}
 	while (stack->b != NULL)
 	{
 		rotation = high_num_pos(stack->b, &high);
-		while (stack -> b -> value != high)
+		while (stack->b->value != high)
 			if (rotation == 0)
 				operations("rb", stack);
 			else
@@ -144,7 +156,7 @@ void	create_stack(int argc, char **argv)
 		i++;
 	}
 	if (argc - 1 <= 10)
-		sort(&stack);
+		small_sort(&stack);
 	else
 		long_sort(&stack);
 	free_node(stack.a);
