@@ -6,83 +6,11 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:16:05 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/04/03 19:50:12 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/04/10 21:38:11 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	rr(char *action, t_stack *stack)
-{
-	rotate(&stack -> a);
-	rotate(&stack -> b);
-	ft_printf("%s\n", action);
-}
-
-void	operations(char *action, t_stack *stack)
-{
-	if (!ft_strncmp(action, "sa", 2))
-		swap(&stack -> a);
-	else if (!ft_strncmp(action, "sb", 2))
-		swap(&stack -> b);
-	else if (!ft_strncmp(action, "pa", 2))
-		push(&stack -> a, &stack -> b);
-	else if (!ft_strncmp(action, "pb", 2))
-		push(&stack -> b, &stack -> a);
-	else if (!ft_strncmp(action, "ra", 2))
-		rotate(&stack -> a);
-	else if (!ft_strncmp(action, "rb", 2))
-		rotate(&stack -> b);
-	else if (!ft_strncmp(action, "rra", 3))
-		rrotate(&stack -> a);
-	else if (!ft_strncmp(action, "rrb", 3))
-		rrotate(&stack -> b);
-	ft_printf("%s\n", action);
-}
-
-int	low_num_pos(t_node *head, int *low)
-{
-	int	low_pos;
-	int	i;
-
-	*low = head -> value;
-	i = 0;
-	while (head)
-	{
-		if (head -> value < *low)
-		{
-			*low = head -> value;
-			low_pos = i;
-		}
-		head = head -> next;
-		i++;
-	}
-	if (low_pos > i / 2)
-		return (1);
-	return (0);
-}
-
-int	high_num_pos(t_node *head, int *high)
-{
-	int	high_pos;
-	int	i;
-
-	*high = head -> value;
-	i = 0;
-	while (head)
-	{
-		if (head -> value > *high)
-		{
-			*high = head -> value;
-			high_pos = i;
-		}
-		head = head -> next;
-		i++;
-	}
-	if (high_pos > i / 2)
-		return (1);
-	return (0);
-}
 
 void	small_sort(t_stack *stack)
 {
@@ -92,53 +20,56 @@ void	small_sort(t_stack *stack)
 	while (!is_sorted(stack -> a))
 	{
 		if (stack -> a -> next -> value < stack -> a -> value)
-			operations("sa", stack);
-		rotation = low_num_pos(stack -> a, &low);
+			run_operation("sa", stack);
+		rotation = locate_low_num_pos(stack -> a, &low);
 		while (stack -> a -> value != low)
 		{
 			if (rotation == 0)
-				operations("ra", stack);
+				run_operation("ra", stack);
 			else
-				operations("rra", stack);
+				run_operation("rra", stack);
 		}
 		if (!is_sorted(stack -> a))
-			operations("pb", stack);
+			run_operation("pb", stack);
 	}
 	while (stack -> b != NULL)
-		operations("pa", stack);
+		run_operation("pa", stack);
 }
 
 void	long_sort(t_stack *stack)
 {
 	int	i;
-	int high;
-	int rotation;
+	int	high;
+	int	rotation;
 
-	low_num_pos(stack->a, &i);
+	locate_low_num_pos(stack->a, &i);
 	while (stack->a != NULL)
 	{
-		if (stack->a->value < i + 20)
+		if (stack->a->value < i + stack->factor_to_push)
 		{
-			operations("pb", stack);
+			run_operation("pb", stack);
 			i++;
 		}
 		else
 		{
-			if (i > 2 && stack->b->value < stack->b->next->value)
-				rr("rr", stack);
+			if (stack->b && stack->b->next && \
+				stack->b->value < stack->b->next->value)
+				run_operation("rr", stack);
 			else
-				operations("ra", stack);
+				run_operation("ra", stack);
 		}
 	}
 	while (stack->b != NULL)
 	{
-		rotation = high_num_pos(stack->b, &high);
+		rotation = locate_high_num_pos(stack->b, &high);
 		while (stack->b->value != high)
+		{
 			if (rotation == 0)
-				operations("rb", stack);
+				run_operation("rb", stack);
 			else
-				operations("rrb", stack);
-		operations("pa", stack);
+				run_operation("rrb", stack);
+		}
+		run_operation("pa", stack);
 	}
 }
 
@@ -150,6 +81,7 @@ void	create_stack(int argc, char **argv)
 	i = 1;
 	stack.a = NULL;
 	stack.b = NULL;
+	stack.factor_to_push = argc / 200 * 5 + 10;
 	while (i < argc)
 	{
 		insert_back(&stack.a, ft_atoi(argv[i]));

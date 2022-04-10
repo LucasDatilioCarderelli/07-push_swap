@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:44:07 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/26 01:53:53 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/04/10 21:36:23 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_bool
 typedef struct s_node
 {
 	int				value;
+	int				index;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
@@ -38,6 +39,7 @@ typedef struct s_stack
 {
 	t_node	*a;
 	t_node	*b;
+	int		factor_to_push;
 }	t_stack;
 
 int			valid_args(int argc, char **argv);
@@ -52,6 +54,11 @@ void		push(t_node **dest, t_node **src);
 void		rotate(t_node **head);
 void		rrotate(t_node **head);
 void		swap(t_node **head);
+
+int			locate_high_num_pos(t_node *head, int *high);
+int			locate_low_num_pos(t_node *head, int *low);
+
+void		run_operation(char *action, t_stack *stack);
 
 long int	ft_atol(const char *str);
 
