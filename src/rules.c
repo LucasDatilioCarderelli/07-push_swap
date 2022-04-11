@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 21:42:41 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/04/03 05:20:19 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/04/11 04:02:16 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	push(t_node **dest, t_node **src)
 
 	if (*src == NULL)
 		return ;
-	insert_front(dest, (*src)->value);
+	insert_front(dest, (*src)->value, (*src)->index);
 	tmp = *src;
 	(*src) = (*src)->next;
 	free(tmp);
@@ -30,7 +30,7 @@ void	rotate(t_node **head)
 
 	if (*head == NULL)
 		return ;
-	insert_back(head, (*head)->value);
+	insert_back(head, (*head)->value, (*head)->index);
 	tmp = *head;
 	*head = (*head)->next;
 	free(tmp);
@@ -44,24 +44,28 @@ void	rrotate(t_node **head)
 	if (*head == NULL)
 		return ;
 	temp = *head;
-	while (temp -> next -> next != NULL)
-		temp = temp -> next;
-	last_node = temp -> next;
-	temp -> next = NULL;
-	insert_front(head, last_node -> value);
+	while (temp->next->next != NULL)
+		temp = temp->next;
+	last_node = temp->next;
+	temp->next = NULL;
+	insert_front(head, last_node->value, last_node->index);
 	free(last_node);
 }
 
 void	swap(t_node **head)
 {
-	int	tmp;
+	int	tmp_value;
+	int	tmp_index;
 
 	if (*head == NULL)
 		return ;
 	if ((*head) && (*head)->next)
 	{
-		tmp = (*head)->value;
-		(*head)->value = (*head)->next -> value;
-		(*head)->next -> value = tmp;
+		tmp_value = (*head)->value;
+		tmp_index = (*head)->index;
+		(*head)->value = (*head)->next->value;
+		(*head)->index = (*head)->next->index;
+		(*head)->next->value = tmp_value;
+		(*head)->next->index = tmp_index;
 	}
 }

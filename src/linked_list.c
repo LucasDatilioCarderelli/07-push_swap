@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 00:49:54 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/03/17 01:48:57 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/04/10 22:21:13 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
  * @param head First pointer of the list.
  * @param value Int value of the node.
  */
-void	insert_back(t_node **head, int value)
+void	insert_back(t_node **head, int value, int index)
 {
 	t_node	*new_node;
 	t_node	*temp;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	new_node -> value = value;
+	new_node -> index = index;
 	new_node -> next = NULL;
 	if (*head == NULL)
 	{
@@ -45,12 +46,13 @@ void	insert_back(t_node **head, int value)
  * @param head First pointer of the list.
  * @param value Int value of the node.
  */
-void	insert_front(t_node	**head, int value)
+void	insert_front(t_node	**head, int value, int index)
 {
 	t_node	*new_node;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	new_node -> value = value;
+	new_node -> index = index;
 	new_node -> next = *head;
 	new_node -> prev = NULL;
 	if (*head != NULL)
@@ -86,7 +88,7 @@ void	print_node(t_node *head)
 		printf("NULL\n");
 	while (head != NULL)
 	{
-		ft_printf("%d \n", head -> value);
+		ft_printf("%d \n", head -> index);
 		head = head -> next;
 	}
 }
