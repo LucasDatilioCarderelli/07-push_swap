@@ -6,7 +6,7 @@
 /*   By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 02:16:13 by ldatilio          #+#    #+#             */
-/*   Updated: 2022/04/11 03:39:27 by ldatilio         ###   ########.fr       */
+/*   Updated: 2022/04/15 23:49:07 by ldatilio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,14 @@ static t_node	*get_next_min(t_node **stack)
 	min = NULL;
 	has_min = 0;
 	head = *stack;
-	if (head)
+	while (head)
 	{
-		while (head)
+		if ((head->index == -1) && (has_min == 0 || head->value < min->value))
 		{
-			if ((head->index == -1) && (!has_min || head->value < min->value))
-			{
-				min = head;
-				has_min = 1;
-			}
-			head = head->next;
+			min = head;
+			has_min = 1;
 		}
+		head = head->next;
 	}
 	return (min);
 }
@@ -55,6 +52,7 @@ int	locate_low_num_pos(t_node *head, int *low)
 	int	low_pos;
 	int	i;
 
+	low_pos = 0;
 	*low = head->value;
 	i = 0;
 	while (head)
@@ -77,6 +75,7 @@ int	locate_high_num_pos(t_node *head, int *high)
 	int	high_pos;
 	int	i;
 
+	high_pos = 0;
 	*high = head->value;
 	i = 0;
 	while (head)

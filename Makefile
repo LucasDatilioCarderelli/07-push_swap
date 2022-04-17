@@ -6,7 +6,7 @@
 #    By: ldatilio <ldatilio@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 15:13:58 by ldatilio          #+#    #+#              #
-#    Updated: 2022/04/10 19:52:27 by ldatilio         ###   ########.fr        #
+#    Updated: 2022/04/17 18:56:41 by ldatilio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,8 @@ PRINTF		=	./libs/printf/libftprintf.a
 SRC_PATH	=	./src/
 OBJ_PATH	=	./obj/
 
-SRC_FILES	=	main.c validations.c linked_list.c	\
-				rules.c locate_number.c utils.c		\
-				operations.c
+SRC_FILES	=	linked_list.c locate_number.c operations.c \
+				push_swap.c rules.c utils.c validations.c
 
 SRC			=	$(addprefix $(SRC_PATH),$(SRC_FILES))
 OBJ			=	$(addprefix $(OBJ_PATH),$(subst .c,.o,$(SRC_FILES)))
