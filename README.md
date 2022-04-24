@@ -23,9 +23,10 @@
 </p>
 
 <div align="center">
-	<a href="https://github.com/LucasDatilioCarderelli/02-Pipex">
+	<a href="https://github.com/LucasDatilioCarderelli/02-Push_swap">
 		<img src="https://github.com/LucasDatilioCarderelli/42Cursus/blob/master/img/push_swap.png">
 	</a>
+	<h2> 96% [OK] </h2>
 </div>
 
 ---
